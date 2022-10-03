@@ -1,7 +1,12 @@
 const sequelize = require('./config/db.js');
 const express = require('express');
+const routes = require('./routes/index.routes.js');
+
 const app = express();
 app.use(express.json());
+
+// Routes
+app.use('/', routes);
 
 try {
     sequelize.authenticate();
