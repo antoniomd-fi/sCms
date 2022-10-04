@@ -1,6 +1,7 @@
 const sequelize = require('./config/db.js');
 const express = require('express');
 const routes = require('./routes/index.routes.js');
+const { swaggerDocs } = require('./swagger.js');
 
 const app = express();
 app.use(express.json());
@@ -19,4 +20,5 @@ try {
 const PORT = 3000;
 app.listen(PORT, () => {
     console.log("Server listing on PORT 3000");
+    swaggerDocs(app, PORT);
 });
