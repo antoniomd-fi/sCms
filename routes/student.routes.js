@@ -44,7 +44,7 @@ const auth = require ('../config/auth.js');
  * 
  * 
  */ 
-router.post('/', auth.required ,create);
+router.post('/' ,create);
 
 
 // Export the router
