@@ -1,36 +1,5 @@
 const User = require('../models/users.js');
 
-async function create(req, res) {
-    // Validate request
-    if (!req.body.username || !req.body.name || !req.body.surname || !req.body.email || !req.body.phone || !req.body.isAdmin || !req.body.password_hash || !req.body.password_salt) {
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-        return;
-    }
-
-    // Create a User
-    const user = {
-        username: req.body.username,
-        name: req.body.name,
-        surname: req.body.surname,
-        email: req.body.email,
-        phone: req.body.phone,
-        isAdmin: req.body.isAdmin,
-        password_hash: req.body.password_hash,
-        password_salt: req.bo.password_salt
-    };
-
-    // Save User in the database
-    try {
-        const data = await User.create(user);
-        res.send(data);
-    } catch (error) {
-        res.status(500).send({
-            message: error.message || "Some error occurred while creating the Student."
-        });
-    }
-}
 
 async function signUp(req, res) {
     const body = req.body;
@@ -44,7 +13,8 @@ async function signUp(req, res) {
     } catch (err) {
         if (["SequelizeValidationError", "SequelizeUniqueConstraintError"].includes(err.name) ) {
             return res.status(400).json({
-                error: err.errors.map(e => e.message)
+                //error: err.errors.map(e => e.message)
+                error: err,
             })
         }
         else {
