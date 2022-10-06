@@ -19,6 +19,8 @@
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "sequelize": "^6.23.1",
-    "sqlite3": "^5.1.1"
+    "sqlite3": "^5.1.1",
+    "swagger-jsdoc": "^6.2.5",
+    "swagger-ui-express": "^4.5.0"
   }
 }
