@@ -2,8 +2,13 @@
 const crypto = require('crypto');
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
-
+let countId = 0
 const User = sequelize.define('User', {
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
+    },
     username: {
         type: DataTypes.CHAR(64),
         allowNull: false,
@@ -28,10 +33,10 @@ const User = sequelize.define('User', {
             isEmail: true
         }
     },
-    phone:{
+    phone: {
         type: DataTypes.CHAR(10),
         allowNull: false,
-        validate:{
+        validate: {
             is: /^\+[0-9][0-9]\d{10}$/
         }
     },
@@ -50,15 +55,15 @@ const User = sequelize.define('User', {
 
 });
 
-User.createPassword = function(plainText) {
+User.createPassword = function (plainText) {
     const salt = crypto.randomBytes(16).toString('hex');
     const hash = crypto
         .pbkdf2Sync(plainText, salt, 10000, 512, "sha512")
         .toString("hex");
-    return {salt: salt, hash: hash}
+    return { salt: salt, hash: hash }
 }
 
-User.validatePassword = function(password, user_salt, user_hash) {
+User.validatePassword = function (password, user_salt, user_hash) {
     const hash = crypto
         .pbkdf2Sync(password, user_salt, 10000, 512, "sha512")
         .toString("hex");
