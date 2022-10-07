@@ -42,3 +42,4 @@ async function logIn(req, res) {
 }
 
 module.exports = { signUp, logIn }
+

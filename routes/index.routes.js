@@ -16,3 +16,4 @@ router.use('/notes', notes);
 router.use('/users', users);
 
 module.exports = router;
+
