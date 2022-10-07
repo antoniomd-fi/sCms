@@ -3,11 +3,11 @@ const sequelize = require('../config/db.js');
 
 const Student = sequelize.define('Student',{
     firstname:{
-        type: DataTypes.CHAR(64),
+        type: DataTypes.STRING,
         allowNull: false
     },
     lastname:{
-        type: DataTypes.CHAR(64),
+        type: DataTypes.STRING,
         allowNull: false
     },
     fullname:{
@@ -17,15 +17,15 @@ const Student = sequelize.define('Student',{
         }
     },
     email:{
-        type: DataTypes.CHAR(64),
+        type: DataTypes.STRING,
         allowNull: false,
         unique: true,
         validate:{
             isEmail: true
         }
     },
-    group: {
-        type: DataTypes.CHAR(64),
+    group:{
+        type: DataTypes.STRING,
         allowNull: false
     }
 }); 

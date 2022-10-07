@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node ./app.js",
     "dev": "nodemon ./app.js",
+    "swagger-autogen": "node swagger.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -20,7 +21,7 @@
     "passport-local": "^1.0.0",
     "sequelize": "^6.23.1",
     "sqlite3": "^5.1.1",
-    "swagger-jsdoc": "^6.2.5",
+    "swagger-autogen": "^2.22.0",
     "swagger-ui-express": "^4.5.0"
   },
   "devDependencies": {

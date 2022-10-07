@@ -12,10 +12,22 @@ const Notes = sequelize.define('Notes',{
 });
 
 // Relationship between Notes and Student
-Notes.belongsTo(Student);
-Student.hasMany(Notes);
+Student.hasMany(Notes, {
+    foreignKey: 'studentId',
+    sourceKey: 'id'
+});
+Notes.belongsTo(Student, {
+    foreignKey:'studentId',
+    targetKey:'id'
+});
 // Relationship between Notes and Course
-Notes.belongsTo(Course);
-Course.hasMany(Notes);
+Course.hasMany(Notes,{
+    foreignKey: 'noteId',
+    sourceKey: 'id'
+});
+Notes.belongsTo(Course, {
+    foreignKey:'noteId',
+    targetKey:'id'
+});
 
 module.exports = Notes;
