@@ -3,6 +3,8 @@ const router = require('express').Router();
 const {
     create
 } = require('../controllers/students.controller.js');
+const auth = require ('../config/auth.js');
+
 // Create a new Student
 
 
@@ -42,7 +44,7 @@ const {
  * 
  * 
  */ 
-router.post('/', create);
+router.post('/' ,create);
 
 
 // Export the router

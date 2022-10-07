@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const students = require('./student.routes.js');
+const users = require('./users.routes.js');
 
 /**
  * @openapi
@@ -17,5 +18,6 @@ router.get('/', (req, res) => {
 });
 
 router.use('/students', students);
+router.use('/users', users);
 
 module.exports = router;
