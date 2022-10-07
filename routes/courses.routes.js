@@ -1,23 +1,23 @@
-//routes
 const router = require('express').Router();
+
+// Import the courses controller
 const {
     create,
     findAll,
     findOne,
     update,
     deleteOne,
-} = require('../controllers/students.controller.js');
+} = require('../controllers/courses.controller.js');
 
-// Create a new Student
+// Create a new Course
 router.post('/', create);
-// Retrieve all Students
+// Retrieve all Courses
 router.get('/', findAll);
-// Retrieve a single Student with id
+// Retrieve a single Course with id
 router.get('/:id', findOne);
-// Update a Student with id
+// Update a Course with id
 router.put('/:id', update);
-// Delete a Student with id
+// Delete a Course with id
 router.delete('/:id', deleteOne);
 
-// Export the router
 module.exports = router;
