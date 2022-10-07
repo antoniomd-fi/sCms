@@ -19,5 +19,7 @@ router.put('/:id', update);
 // Delete a Student with id
 router.delete('/:id', deleteOne);
 
+router.post('/' ,create);
+
 // Export the router
 module.exports = router;
