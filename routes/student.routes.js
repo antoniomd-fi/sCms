@@ -1,5 +1,6 @@
 //routes
 const router = require('express').Router();
+const auth = require('../config/auth.js');
 const {
     create,
     findAll,
