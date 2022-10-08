@@ -4,6 +4,7 @@ const Student = require('./students.js');
 const Course = require('./courses.js');
 
 
+
 const Notes = sequelize.define('Notes',{
     score:{
         type: DataTypes.DECIMAL(3,2),
@@ -22,11 +23,11 @@ Notes.belongsTo(Student, {
 });
 // Relationship between Notes and Course
 Course.hasMany(Notes,{
-    foreignKey: 'noteId',
+    foreignKey: 'courseId',
     sourceKey: 'id'
 });
 Notes.belongsTo(Course, {
-    foreignKey:'noteId',
+    foreignKey:'courseId',
     targetKey:'id'
 });
 

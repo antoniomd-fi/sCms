@@ -11,43 +11,100 @@ async function create(req, res) {
         });
         return;
     }
+    const student = await Student.findByPk(req.body.studentId);
+    const course = await Course.findByPk(req.body.courseId);
+    if (student && course) {
+        // Verify if the student has already a note for the course
+        const hasNoteCourse = await Notes.findOne({
+            where: {
+                studentId: req.body.studentId,
+                courseId: req.body.courseId
+            }
+        });
 
-    // Create a Note
-    const note = {
-        score: req.body.score,
-        studentId: req.body.studentId,
-        courseId: req.body.courseId
-    };
+        if (hasNoteCourse) {
+            res.status(400).json({
+                message: "Note already exists!"
+            });
+            return;
+        }
 
-    // Save Note in the database
+        // Create a Note
+        const note = {
+            score: req.body.score,
+            studentId: req.body.studentId,
+            courseId: req.body.courseId
+        };
+
+        // Save Note in the database
+        try {
+            const data = await Notes.create(note);
+            res.json(data);
+        } catch (error) {
+            res.status(500).json({
+                message: error.message || "Some error occurred while creating the Note."
+            });
+        }
+    } else {
+        res.status(400).json({
+            message: "Student or course not found!"
+        });
+    }
+}
+
+
+// Retrieve all Notes from the database.
+async function findAll(req, res) {
     try {
-        const data = await Notes.create(note);
-        res.send(data);
+        const data = await Notes.findAll();
+        res.json(data);
     } catch (error) {
-        res.status(500).send({
-            message: error.message || "Some error occurred while creating the Note."
+        res.status(500).json({
+            message: error.message || "Some error occurred while retrieving notes."
         });
     }
 }
 
 // get Students note
-async function getStudentNotes(req,res) {
-    const {id} = req.params;
-    const student = await Student.findByPk(id);
+async function getStudentNotes(req, res) {
+    const { idStudent } = req.params;
+    const student = await Student.findByPk(idStudent);
     if (student) {
         const notes = await Notes.findAll({
             where: {
-                studentId: id
+                studentId: idStudent
             }
         });
-        res.send(notes);
+        res.json(notes);
+    }else{
+        res.status(400).json({
+            message: "Student not found!"
+        });
     }
 }
 
+// get Students courses
+async function getStudentCourses(req, res) {
+    const { idStudent } = req.params;
+    const student = await Student.findByPk(idStudent);
+    if (student) {
+        const notes = await Notes.findAll({
+            where: {
+                studentId: idStudent
+            }
+        });
+        const courses = [];
+        for (let i = 0; i < notes.length; i++) {
+            const course = await Course.findByPk(notes[i].courseId);
+            courses.push(course);
+        }
+        res.send(courses);
+    }
+}
 
 // Find a single Note with an idStudent
 async function findOne(req, res) {
-    const id = req.params.id;
+    const id = req.params.idNote;
     try {
         const data = await Notes.findAll({
             where: {
@@ -56,7 +113,7 @@ async function findOne(req, res) {
             include: [
                 {
                     model: Student,
-                    attributes: ['name']
+                    attributes: ['firstname', 'lastname', 'email']
                 },
                 {
                     model: Course,
@@ -66,7 +123,7 @@ async function findOne(req, res) {
         });
         if (data) {
             res.send(data);
-        }else {
+        } else {
             res.status(404).send({
                 message: "Note not found"
             });
@@ -80,7 +137,7 @@ async function findOne(req, res) {
 
 // Delete a Note with the specified id in the request
 async function deleteOne(req, res) {
-    const id = req.params.id;
+    const id = req.params.idNote;
 
     try {
         const data = await Notes.destroy({
@@ -104,7 +161,9 @@ async function deleteOne(req, res) {
 
 module.exports = {
     create,
+    findAll,
     findOne,
     deleteOne,
-    getStudentNotes
+    getStudentNotes,
+    getStudentCourses
 }
