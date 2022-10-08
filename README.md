@@ -11,14 +11,15 @@ This project is part of phase 2 of the Santander and BEDU scholarship.
 <a name="technologies"></a>
 ## 1. Technologies
 
-* [Sequelize](https://developer.mozilla.org/en-US/docs/Web/HTML)
-* [Swagger](https://developer.mozilla.org/en-US/docs/Web/CSS)
+* [Sequelize](https://sequelize.org/)
+* [Swagger](https://swagger.io/)
 * [Crypto](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-* [Dotenv](https://getbootstrap.com/)
-* [Express](https://webpack.js.org/)
-* [Passport](https://babeljs.io/)
-* [Nodemon](https://babeljs.io/)
-* [Sqlite 3](https://babeljs.io/)
+* [Dotenv](https://www.npmjs.com/package/dotenv)
+* [Express](https://expressjs.com/)
+* [Passport](https://www.passportjs.org/)
+* [Nodemon](https://www.npmjs.com/package/nodemon)
+* [Sqlite 3](https://www.sqlite.org/index.html)
+* [Render](https://render.com/)
 * [Git](https://git-scm.com/)
 * [Github](https://github.com/)
 
