@@ -3,10 +3,12 @@ const swaggerUi = require('swagger-ui-express')
 const sequelize = require('./config/db.js');
 const swaggerFile = require('./swagger_output.json')
 const routes = require('./routes/index.routes.js');
+const auth = require('./config/auth.js');
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(auth.optional);
 
 // Routes
 app.use('/', routes);

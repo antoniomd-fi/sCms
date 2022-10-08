@@ -50,7 +50,7 @@ async function findAll(req, res) {
 
 // Find a single Student with an id
 async function findOne(req, res) {
-    const id = req.params.id;
+    const id = req.params.idStudent;
     try {
         const data = await Student.findByPk(id);
         if (data) {
@@ -69,12 +69,12 @@ async function findOne(req, res) {
 
 // Update a Student by the id in the request
 async function update(req, res) {
-    const id = req.params.id;
+    const id = req.params.idStudent;
     try {
         const data = await Student.update(req.body, {
             where: { id: id }
         });
-        if (data === 1) {
+        if (data == 1) {
             res.json({
                 message: "Student was updated successfully."
             });
@@ -92,7 +92,7 @@ async function update(req, res) {
 
 // Delete a Student with the specified id in the request
 async function deleteOne(req, res) {
-    const id = req.params.id;
+    const id = req.params.idStudent;
     try {
         const data = await Student.destroy({
             where: { id: id }

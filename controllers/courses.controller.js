@@ -10,14 +10,22 @@ async function create(req, res) {
         return;
     }
 
-    // Create a Course
-    const course = {
-        name: req.body.name
-    };
-
-    // Save Course in the database
+    // Save Course in the database only if it doesn't exist
     try {
-        const data = await Course.create(course);
+        const course = await Course.findOne({
+            where: {
+                name: req.body.name
+            }
+        });
+        if (course) {
+            res.status(400).json({
+                message: "Course already exists!"
+            });
+            return;
+        }
+        const data = await Course.create({
+            name: req.body.name
+        });
         res.json(data);
     } catch (error) {
         res.status(500).json({
@@ -25,7 +33,6 @@ async function create(req, res) {
         });
     }
 }
-
 
 // Retrieve all Courses from the database.
 async function findAll(req, res) {
@@ -47,7 +54,7 @@ async function findAll(req, res) {
 
 // Find a single Course with an id
 async function findOne(req, res) {
-    const id = req.params.id;
+    const id = req.params.idCourse;
     try {
         const data = await Course.findByPk(id);
         if (data) {
@@ -66,7 +73,7 @@ async function findOne(req, res) {
 
 // Update a Course by the id in the request
 async function update(req, res) {
-    const id = req.params.id;
+    const id = req.params.idCourse;
     try {
         const data = await Course.update(req.body, {
             where: { id: id }
@@ -89,7 +96,7 @@ async function update(req, res) {
 
 // Delete a Course with the specified id in the request
 async function deleteOne(req, res) {
-    const id = req.params.id;
+    const id = req.params.idCourse;
     try {
         const data = await Course.destroy({
             where: { id: id }

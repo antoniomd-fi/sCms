@@ -76,12 +76,12 @@
         }
       }
     },
-    "/students/{id}": {
+    "/students/{idStudent}": {
       "get": {
         "description": "",
         "parameters": [
           {
-            "name": "id",
+            "name": "idStudent",
             "in": "path",
             "required": true,
             "type": "string"
@@ -99,11 +99,11 @@
           }
         }
       },
-      "put": {
+      "patch": {
         "description": "",
         "parameters": [
           {
-            "name": "id",
+            "name": "idStudent",
             "in": "path",
             "required": true,
             "type": "string"
@@ -125,7 +125,7 @@
         "description": "",
         "parameters": [
           {
-            "name": "id",
+            "name": "idStudent",
             "in": "path",
             "required": true,
             "type": "string"
@@ -189,34 +189,24 @@
         }
       }
     },
-    "/courses/{id}": {
+    "/courses/{idCourse}": {
       "get": {
         "description": "",
         "parameters": [
           {
-            "name": "id",
+            "name": "idCourse",
             "in": "path",
             "required": true,
             "type": "string"
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
+        "responses": {}
       },
-      "put": {
+      "patch": {
         "description": "",
         "parameters": [
           {
-            "name": "id",
+            "name": "idCourse",
             "in": "path",
             "required": true,
             "type": "string"
@@ -238,7 +228,7 @@
         "description": "",
         "parameters": [
           {
-            "name": "id",
+            "name": "idCourse",
             "in": "path",
             "required": true,
             "type": "string"
@@ -291,36 +281,38 @@
             "description": "Internal Server Error"
           }
         }
-      }
-    },
-    "/notes/{id}": {
+      },
       "get": {
         "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
           }
         }
+      }
+    },
+    "/notes/{idNote}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "idNote",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
       },
       "delete": {
         "description": "",
         "parameters": [
           {
-            "name": "id",
+            "name": "idNote",
             "in": "path",
             "required": true,
             "type": "string"
@@ -336,12 +328,12 @@
         }
       }
     },
-    "/notes/student/{id}": {
+    "/notes/student/{idStudent}": {
       "get": {
         "description": "",
         "parameters": [
           {
-            "name": "id",
+            "name": "idStudent",
             "in": "path",
             "required": true,
             "type": "string"
@@ -350,6 +342,58 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/notes/student/courses/{idStudent}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "idStudent",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/users/signUp": {
+      "post": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/users/logIn": {
+      "post": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
