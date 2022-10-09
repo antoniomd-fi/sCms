@@ -36,10 +36,11 @@ async function findAll(req, res) {
     try {
         const data = await Student.findAll();
         if (data.length > 0) {
-            res.send(data);
+            res.json(data);
         }else {
             res.status(404).json({
-                message: "No Students found"
+                message: "No Students found",
+                data: []
             });
         }
     } catch (error) {

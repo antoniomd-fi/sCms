@@ -8,5 +8,4 @@ router.get('/', findAll);
 router.get('/:idUser', findOne);
 router.delete('/:idUser',auth.isAdmin, deleteOne)
 
-
 module.exports = router;

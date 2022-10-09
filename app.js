@@ -10,15 +10,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(auth.optional);
 
+
 // Routes
 app.use('/', routes);
-app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 //await sequelize.sync({ force: true });
 
 try {
     sequelize.authenticate();
-    sequelize.sync({ force: true });
+    sequelize.sync();
     console.log('Connected to DB');
 } catch (error) {
     console.log('Unable to connect to DB:', error);
@@ -26,5 +27,5 @@ try {
 
 
 app.listen(process.env['PORT'] || 3000, () => {
-    console.log("Server listing on PORT "+ process.env['PORT'] );
+    console.log("Server listing on PORT " + process.env['PORT']);
 });

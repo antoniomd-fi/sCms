@@ -4,11 +4,13 @@ const courses = require('./courses.routes.js');
 const notes = require('./notes.routes.js');
 const users = require('./users.routes.js');
 
+/*
 router.get('/', (req, res) => {
     res.json({
         message: 'Welcome to the API'
     });
 });
+*/
 
 router.use('/students', students);
 router.use('/courses', courses);

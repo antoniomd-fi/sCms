@@ -2,8 +2,21 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "REST API",
-    "description": ""
+    "title": "School Management System API",
+    "description":"This is a simple CRUD API application made with Express and documented with Swagger",
+    "contact": {
+        "name": "Swagger",
+        "url": "https://swagger.io",
+        "email": ""
+    }
+  },
+  "securityDefinitions": {
+    "bearer": {
+      "name": "Authorization",
+      "in": "header",
+      "type": "apiKey",
+      "description": "JWT Authorization header"
+    }
   },
   "host": "localhost:3000",
   "basePath": "/",
@@ -11,20 +24,129 @@
     "http"
   ],
   "paths": {
-    "/": {
+    "/users/signUp": {
+      "post": {
+        "description": "Sign Up",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username":{"example": "string"},
+                "name":{"example": "string"},
+                "surname":{"example": "string"},
+                "email":{"example": "string"},
+                "phone":{"example": "string"},
+                "isAdmin":{"example": "boolean"},
+                "password":{"example": "string"}
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/users/logIn": {
+      "post": {
+        "description": "Log In to the system",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username":{"example": "string"},
+                "password":{"example": "string"}
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/users/": {
       "get": {
-        "description": "",
+        "description": "Retrive all users",
         "parameters": [],
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/users/{idUser}": {
+      "get": {
+        "description": "Retrive user by id",
+        "parameters": [
+          {
+            "name": "idUser",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      },
+      "delete": {
+        "description": "Delete User",
+        "parameters": [
+          {
+            "name": "idUser",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/students/": {
       "post": {
-        "description": "",
+        "security": [ { "bearer": [] } ],
+        "description": "Created Student",
         "parameters": [
           {
             "name": "body",
@@ -33,16 +155,16 @@
               "type": "object",
               "properties": {
                 "firstname": {
-                  "example": "any"
+                  "example": "string"
                 },
                 "lastname": {
-                  "example": "any"
+                  "example": "string"
                 },
                 "email": {
-                  "example": "any"
+                  "example": "string"
                 },
                 "group": {
-                  "example": "any"
+                  "example": "string"
                 }
               }
             }
@@ -55,13 +177,16 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
         }
       },
       "get": {
-        "description": "",
+        "description": "Retrive all users",
         "parameters": [],
         "responses": {
           "200": {
@@ -78,7 +203,7 @@
     },
     "/students/{idStudent}": {
       "get": {
-        "description": "",
+        "description": "Retrive student by id",
         "parameters": [
           {
             "name": "idStudent",
@@ -100,7 +225,7 @@
         }
       },
       "patch": {
-        "description": "",
+        "description": "Update Student",
         "parameters": [
           {
             "name": "idStudent",
@@ -122,7 +247,7 @@
         }
       },
       "delete": {
-        "description": "",
+        "description": "Delete Student",
         "parameters": [
           {
             "name": "idStudent",
@@ -135,6 +260,12 @@
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
           "404": {
             "description": "Not Found"
           },
@@ -146,7 +277,7 @@
     },
     "/courses/": {
       "post": {
-        "description": "",
+        "description": "Create Course",
         "parameters": [
           {
             "name": "body",
@@ -174,7 +305,7 @@
         }
       },
       "get": {
-        "description": "",
+        "description": "Retrive all courses",
         "parameters": [],
         "responses": {
           "200": {
@@ -191,7 +322,7 @@
     },
     "/courses/{idCourse}": {
       "get": {
-        "description": "",
+        "description": "Retrive course by id",
         "parameters": [
           {
             "name": "idCourse",
@@ -203,7 +334,7 @@
         "responses": {}
       },
       "patch": {
-        "description": "",
+        "description": "Update course",
         "parameters": [
           {
             "name": "idCourse",
@@ -225,7 +356,7 @@
         }
       },
       "delete": {
-        "description": "",
+        "description": "Delete Course",
         "parameters": [
           {
             "name": "idCourse",
@@ -249,7 +380,7 @@
     },
     "/notes/": {
       "post": {
-        "description": "",
+        "description": "Create Note",
         "parameters": [
           {
             "name": "body",
@@ -283,7 +414,7 @@
         }
       },
       "get": {
-        "description": "",
+        "description": "Retrive all notes",
         "parameters": [],
         "responses": {
           "200": {
@@ -297,7 +428,7 @@
     },
     "/notes/{idNote}": {
       "get": {
-        "description": "",
+        "description": "Retrive notes by id",
         "parameters": [
           {
             "name": "idNote",
@@ -309,7 +440,7 @@
         "responses": {}
       },
       "delete": {
-        "description": "",
+        "description": "Delete note",
         "parameters": [
           {
             "name": "idNote",
@@ -330,7 +461,7 @@
     },
     "/notes/student/{idStudent}": {
       "get": {
-        "description": "",
+        "description": "Get studen by id",
         "parameters": [
           {
             "name": "idStudent",
@@ -351,7 +482,7 @@
     },
     "/notes/student/courses/{idStudent}": {
       "get": {
-        "description": "",
+        "description": "Get courses by student id",
         "parameters": [
           {
             "name": "idStudent",
@@ -363,37 +494,6 @@
         "responses": {
           "200": {
             "description": "OK"
-          }
-        }
-      }
-    },
-    "/users/signUp": {
-      "post": {
-        "description": "",
-        "parameters": [],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        }
-      }
-    },
-    "/users/logIn": {
-      "post": {
-        "description": "",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
           }
         }
       }
