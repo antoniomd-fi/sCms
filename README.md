@@ -28,17 +28,16 @@ This project is part of phase 2 of the Santander and BEDU scholarship.
 Create a new folder and clone the repository.
 Opend the terminal and type:
 ```bash
-    git clone https://github.com/antoniomd-fi/RecipesApp.git
+    https://github.com/antoniomd-fi/sCms.git
 ```
 In the terminal type:
 ```bash
-    cd RecipesApp
+    cd sCms
 ```
 Install node modules and run the application.
 ```bash
     npm install
-    npm install -D webpack-dev-server
-    npm run start
+    npm run dev
 ```
 
 <a name="usage"></a>
