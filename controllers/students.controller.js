@@ -4,7 +4,8 @@ const Student = require('../models/students.js');
 // Create and Save a new Student async
 async function create(req, res) {
     // Validate request
-    if (!req.body.firstname || !req.body.lastname || !req.body.email || !req.body.group) {
+    const body = req.body;
+    if (!body.firstname || !body.lastname || !body.email || !body.group) {
         res.status(400).json({
             message: "Content can not be empty!"
         });

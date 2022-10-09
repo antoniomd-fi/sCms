@@ -14,6 +14,8 @@ app.use(auth.optional);
 app.use('/', routes);
 app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
+//await sequelize.sync({ force: true });
+
 try {
     sequelize.authenticate();
     sequelize.sync();

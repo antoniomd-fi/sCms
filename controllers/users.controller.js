@@ -9,12 +9,19 @@ async function signUp(req, res) {
         user.password_salt = salt;
         user.password_hash = hash;
         await user.save();
-        res.status(201).json(user);
+        res.status(201).json({
+            "username": user.username,
+            "name": user.name,
+            "surname": user.surname,
+            "email": user.email,
+            "phone": user.phone,
+            "isAdmin": user.isAdmin
+        });
     } catch (err) {
         if (["SequelizeValidationError", "SequelizeUniqueConstraintError"].includes(err.name) ) {
             return res.status(400).json({
-                //error: err.errors.map(e => e.message)
-                error: err,
+                error: err.errors.map(e => e.message)
+                //error: err,
             })
         }
         else {
@@ -22,7 +29,7 @@ async function signUp(req, res) {
         }
     }
 }
-
+/*Sign In*/
 async function logIn(req, res) {
     const body = req.body;
     const user = await User.findOne({where: {username: body['username']}});
@@ -37,9 +44,73 @@ async function logIn(req, res) {
            token: User.generateJWT(user)
         });
     } else {
-        return res.status(400).json({mensaje: "Password Incorrecto"});
+        return res.status(400).json({mensaje: "Wrong Password"});
     }
 }
 
-module.exports = { signUp, logIn }
+// Retrieve all Users from the database.
+async function findAll(req, res) {
+    try {
+        const data = await User.findAll({
+            attributes:{
+                exclude: ['password_hash', 'password_salt']
+            }
+        });
+        if (data.length > 0) {
+            res.send(data);
+        }else {
+            res.status(404).json({
+                message: "No Users found"
+            });
+        }
+    } catch (error) {
+        res.status(500).json({
+            message: error.message || "Some error occurred while retrieving users."
+        });
+    }
+}
+
+// Find a single Users with an id
+async function findOne(req, res) {
+    const id = req.params.idUser;
+    try {
+        const data = await User.findByPk(id);
+        if (data) {
+            res.json(data);
+        }else {
+            res.status(404).json({
+                message: "User not found"
+            });
+        }
+    } catch (error) {
+        res.status(500).json({
+            message: error.message || "Some error occurred while retrieving users."
+        });
+    }
+}
+
+// Delete a User with the specified id in the request
+async function deleteOne(req, res) {
+    const id = req.params.idUser;
+    try {
+        const data = await User.destroy({
+            where: { id: id }
+        });
+        if (data == 1) {
+            res.json({
+                message: "User was deleted successfully!"
+            });
+        }else {
+            res.status(404).json({
+                message: "User not found"
+            });
+        }
+    } catch (error) {
+        res.status(500).json({
+            message: error.message || "Some error occurred while deleting the User."
+        });
+    }
+}
+
+module.exports = { signUp, logIn, findAll, findOne, deleteOne}
 
