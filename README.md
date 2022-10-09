@@ -28,7 +28,7 @@ This project is part of phase 2 of the Santander and BEDU scholarship.
 Create a new folder and clone the repository.
 Opend the terminal and type:
 ```bash
-    https://github.com/antoniomd-fi/sCms.git
+   git clone https://github.com/antoniomd-fi/sCms.git
 ```
 In the terminal type:
 ```bash
