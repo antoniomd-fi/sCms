@@ -29,7 +29,7 @@ async function signUp(req, res) {
         }
     }
 }
-
+/*Sign In*/
 async function logIn(req, res) {
     const body = req.body;
     const user = await User.findOne({where: {username: body['username']}});
@@ -89,5 +89,28 @@ async function findOne(req, res) {
     }
 }
 
-module.exports = { signUp, logIn, findAll, findOne}
+// Delete a User with the specified id in the request
+async function deleteOne(req, res) {
+    const id = req.params.idUser;
+    try {
+        const data = await User.destroy({
+            where: { id: id }
+        });
+        if (data == 1) {
+            res.json({
+                message: "User was deleted successfully!"
+            });
+        }else {
+            res.status(404).json({
+                message: "User not found"
+            });
+        }
+    } catch (error) {
+        res.status(500).json({
+            message: error.message || "Some error occurred while deleting the User."
+        });
+    }
+}
+
+module.exports = { signUp, logIn, findAll, findOne, deleteOne}
 
