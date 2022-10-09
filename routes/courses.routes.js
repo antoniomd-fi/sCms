@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const auth = require('../config/auth.js')
 
 // Import the courses controller
 const {
@@ -10,14 +11,14 @@ const {
 } = require('../controllers/courses.controller.js');
 
 // Create a new Course
-router.post('/', create);
+router.post('/',auth.isAdmin, create);
 // Retrieve all Courses
-router.get('/', findAll);
+router.get('/',auth.optional, findAll);
 // Retrieve a single Course with id
-router.get('/:idCourse', findOne);
+router.get('/:idCourse',auth.optional, findOne);
 // Update a Course with id
-router.patch('/:idCourse', update);
+router.patch('/:idCourse',auth.isAdmin, update);
 // Delete a Course with id
-router.delete('/:idCourse', deleteOne);
+router.delete('/:idCourse',auth.isAdmin, deleteOne);
 
 module.exports = router;

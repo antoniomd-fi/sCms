@@ -160,7 +160,6 @@ async function deleteOne(req, res) {
 }
 
 //Update a sutdent's score inside Note
-
 async function updateScore (req, res){
     const { idStudent } = req.params;
     const note = await Notes.update({

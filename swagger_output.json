@@ -11,21 +11,44 @@
     }
   },
   "securityDefinitions": {
-    "bearer": {
+    "Bearer": {
+      "type": "apiKey",
       "name": "Authorization",
       "in": "header",
-      "type": "apiKey",
-      "description": "JWT Authorization header"
+      "description": "Enter your bearer token in the format **Bearer &lt;token>**"
     }
   },
-  "host": "localhost:3000",
+  "security": [ { "Bearer": [] } ],
+  "host": "https://scool-managment-system.onrender.com",
   "basePath": "/",
   "schemes": [
     "http"
   ],
+  "tags": [
+    {
+      "name": "user",
+      "description": "API to manage users"
+    },
+    {
+      "name":"student",
+      "description":"API to manage students"
+    },
+    {
+      "name":"course",
+      "description":"API to manage courses"
+    },
+    {
+      "name":"note",
+      "description":"API to manage notes of the students"
+    }
+  ],
   "paths": {
     "/users/signUp": {
       "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Sign up",
         "description": "Sign Up",
         "parameters": [
           {
@@ -38,7 +61,7 @@
                 "name":{"example": "string"},
                 "surname":{"example": "string"},
                 "email":{"example": "string"},
-                "phone":{"example": "string"},
+                "phone":{"example": "+525522441100"},
                 "isAdmin":{"example": "boolean"},
                 "password":{"example": "string"}
               }
@@ -57,6 +80,10 @@
     },
     "/users/logIn": {
       "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Log in",
         "description": "Log In to the system",
         "parameters": [
           {
@@ -86,6 +113,10 @@
     },
     "/users/": {
       "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get all users",
         "description": "Retrive all users",
         "parameters": [],
         "responses": {
@@ -103,6 +134,10 @@
     },
     "/users/{idUser}": {
       "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get user by id",
         "description": "Retrive user by id",
         "parameters": [
           {
@@ -115,6 +150,10 @@
         "responses": {}
       },
       "delete": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Delete user by id",
         "description": "Delete User",
         "parameters": [
           {
@@ -145,7 +184,10 @@
     },
     "/students/": {
       "post": {
-        "security": [ { "bearer": [] } ],
+        "tags": [
+          "student"
+        ],
+        "summary": "Create student",
         "description": "Created Student",
         "parameters": [
           {
@@ -186,6 +228,10 @@
         }
       },
       "get": {
+        "tags": [
+          "student"
+        ],
+        "summary": "Get all students",
         "description": "Retrive all users",
         "parameters": [],
         "responses": {
@@ -203,6 +249,10 @@
     },
     "/students/{idStudent}": {
       "get": {
+        "tags": [
+          "student"
+        ],
+        "summary": "Get student by id",
         "description": "Retrive student by id",
         "parameters": [
           {
@@ -225,6 +275,10 @@
         }
       },
       "patch": {
+        "tags": [
+          "student"
+        ],
+        "summary": "Update student by id",
         "description": "Update Student",
         "parameters": [
           {
@@ -247,6 +301,10 @@
         }
       },
       "delete": {
+        "tags": [
+          "student"
+        ],
+        "summary": "Delete student by id",
         "description": "Delete Student",
         "parameters": [
           {
@@ -277,6 +335,10 @@
     },
     "/courses/": {
       "post": {
+        "tags": [
+          "course"
+        ],
+        "summary": "Create course",
         "description": "Create Course",
         "parameters": [
           {
@@ -305,6 +367,10 @@
         }
       },
       "get": {
+        "tags": [
+          "course"
+        ],
+        "summary": "Get all courses",
         "description": "Retrive all courses",
         "parameters": [],
         "responses": {
@@ -322,6 +388,10 @@
     },
     "/courses/{idCourse}": {
       "get": {
+        "tags": [
+          "course"
+        ],
+        "summary": "Get course by id",
         "description": "Retrive course by id",
         "parameters": [
           {
@@ -334,6 +404,10 @@
         "responses": {}
       },
       "patch": {
+        "tags": [
+          "course"
+        ],
+        "summary": "Update course by id",
         "description": "Update course",
         "parameters": [
           {
@@ -356,6 +430,10 @@
         }
       },
       "delete": {
+        "tags": [
+          "course"
+        ],
+        "summary": "Delete course by id",
         "description": "Delete Course",
         "parameters": [
           {
@@ -380,6 +458,10 @@
     },
     "/notes/": {
       "post": {
+        "tags": [
+          "note"
+        ],
+        "summary": "Create note",
         "description": "Create Note",
         "parameters": [
           {
@@ -414,6 +496,10 @@
         }
       },
       "get": {
+        "tags": [
+          "note"
+        ],
+        "summary": "Get all notes",
         "description": "Retrive all notes",
         "parameters": [],
         "responses": {
@@ -428,6 +514,10 @@
     },
     "/notes/{idNote}": {
       "get": {
+        "tags": [
+          "note"
+        ],
+        "summary": "Get note by id",
         "description": "Retrive notes by id",
         "parameters": [
           {
@@ -440,6 +530,10 @@
         "responses": {}
       },
       "delete": {
+        "tags": [
+          "note"
+        ],
+        "summary": "Delete note by id",
         "description": "Delete note",
         "parameters": [
           {
@@ -461,6 +555,10 @@
     },
     "/notes/student/{idStudent}": {
       "get": {
+        "tags": [
+          "note"
+        ],
+        "summary": "Get notes by student id",
         "description": "Get studen by id",
         "parameters": [
           {
@@ -478,10 +576,55 @@
             "description": "Bad Request"
           }
         }
-      }
+      },
+      "put": {
+          "tags": [
+              "note"
+          ],
+          "summary": "Update note by student id",
+          "description": "",
+          "parameters": [
+            {
+              "name": "idStudent",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "body",
+              "in": "body",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "score": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+            },
+            "401": {
+              "description": "Unauthorized"
+            },
+            "404": {
+              "description": "Not Found"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          }
+        }
     },
     "/notes/student/courses/{idStudent}": {
       "get": {
+        "tags": [
+          "note"
+        ],
+        "summary": "Get notes by student id",
         "description": "Get courses by student id",
         "parameters": [
           {

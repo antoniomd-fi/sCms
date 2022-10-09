@@ -12,15 +12,13 @@ const {
 // Create a new Student
 router.post('/',auth.isAdmin,create);
 // Retrieve all Students
-router.get('/', findAll);
+router.get('/', auth.optional,findAll);
 // Retrieve a single Student with id
-router.get('/:idStudent', findOne);
+router.get('/:idStudent', auth.optional,findOne);
 // Update a Student with id
-router.patch('/:idStudent', update);
+router.patch('/:idStudent',auth.optional, update);
 // Delete a Student with id
 router.delete('/:idStudent',auth.isAdmin, deleteOne);
-
-router.post('/' ,create);
 
 // Export the router
 module.exports = router;
