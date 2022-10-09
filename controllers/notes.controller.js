@@ -159,11 +159,42 @@ async function deleteOne(req, res) {
     }
 }
 
+//Update a sutdent's score inside Note
+
+async function updateScore (req, res){
+    const { idStudent } = req.params;
+    const note = await Notes.update({
+        score: req.body.score
+    },
+    {
+        where:{studentId : idStudent}
+    }
+    )
+    try{
+        if (note) {
+            res.status(200).send({
+                message: "Score updated sucefully"
+            })
+        }
+        else {
+            res.status(404).send({
+                message: "Id not found"
+            });
+        }
+    }
+    catch{
+        res.status(500).send({
+            message: error.message || "Some error occurred while retrieving notes."
+        });
+    }
+}
+
 module.exports = {
     create,
     findAll,
     findOne,
     deleteOne,
     getStudentNotes,
-    getStudentCourses
+    getStudentCourses,
+    updateScore
 }
