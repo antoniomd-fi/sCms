@@ -13,7 +13,7 @@ This project is part of phase 2 of the Santander and BEDU scholarship.
 
 * [Sequelize](https://sequelize.org/)
 * [Swagger](https://swagger.io/)
-* [Crypto](https://developer.mozilla.org/en-US/docs/Web/JavaScript](https://nodejs.org/api/crypto.html))
+* [Crypto](https://nodejs.org/api/crypto.html)
 * [Dotenv](https://www.npmjs.com/package/dotenv)
 * [Express](https://expressjs.com/)
 * [Passport](https://www.passportjs.org/)
