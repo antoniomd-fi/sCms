@@ -1,6 +1,6 @@
 //routes
 const router = require('express').Router();
-const auth = require('../config/auth.js');
+const auth = require('../config/auth.js')
 const {
     create,
     findAll,
@@ -10,7 +10,7 @@ const {
 } = require('../controllers/students.controller.js');
 
 // Create a new Student
-router.post('/', create);
+router.post('/',auth.isAdmin,create);
 // Retrieve all Students
 router.get('/', findAll);
 // Retrieve a single Student with id
@@ -18,7 +18,7 @@ router.get('/:idStudent', findOne);
 // Update a Student with id
 router.patch('/:idStudent', update);
 // Delete a Student with id
-router.delete('/:idStudent', deleteOne);
+router.delete('/:idStudent',auth.isAdmin, deleteOne);
 
 router.post('/' ,create);
 

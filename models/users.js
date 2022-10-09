@@ -55,7 +55,14 @@ const User = sequelize.define('User', {
         allowNull: true,
     },
 
-});
+}/*,{
+    defaultScope: {
+        attributes:{
+            exclude: ['password_hash', 'password_salt']
+        }
+    }
+}*/
+);
 
 User.createPassword = function (plainText) {
     const salt = crypto.randomBytes(16).toString('hex');

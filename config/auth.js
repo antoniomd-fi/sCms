@@ -10,18 +10,24 @@ function getTokenFromHeader (req){
 const auth = {
     required: function (req, res, next){
         if (!req.auth || !req.auth.user){
-            return res.sendStatus(401);
+            return res.status(401).json({
+                error:  "Not logged in"
+            });
         }
         next();
     }, 
     isAdmin: function (req, res, next){
         if(!req.auth){
-            return res.sendStatus(401);
+            return res.status(401).json({
+                error: "Not logged in"
+            });
         }
         if (req.auth.admin!= true){
-            return res.sendStatus(403);
+            return res.status(403).json({
+                error: "You must be logged with an admin account"
+            });
         }
-
+        next();
     }   ,
     /*expressjwt({
         secret: secret,
