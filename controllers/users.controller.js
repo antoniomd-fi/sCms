@@ -8,7 +8,7 @@ async function signUp(req, res) {
         const {salt, hash} = User.createPassword(body['password']);
         user.password_salt = salt;
         user.password_hash = hash;
-        user.save().catch(err => {throw error});
+        user.save().catch(err => {throw err});
         res.status(201).json({
             "username": user.username,
             "name": user.name,
