@@ -21,9 +21,6 @@
   "security": [ { "Bearer": [] } ],
   "host": "https://scool-managment-system.onrender.com",
   "basePath": "/",
-  "schemes": [
-    "http"
-  ],
   "tags": [
     {
       "name": "user",
@@ -286,6 +283,27 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstname": {
+                  "example": "string"
+                },
+                "lastname": {
+                  "example": "string"
+                },
+                "email": {
+                  "example": "string"
+                },
+                "group": {
+                  "example": "string"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -415,6 +433,18 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {

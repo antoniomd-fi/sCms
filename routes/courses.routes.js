@@ -11,14 +11,14 @@ const {
 } = require('../controllers/courses.controller.js');
 
 // Create a new Course
-router.post('/',auth.isAdmin, create);
+router.post('/',auth.required, create);
 // Retrieve all Courses
 router.get('/',auth.optional, findAll);
 // Retrieve a single Course with id
 router.get('/:idCourse',auth.optional, findOne);
 // Update a Course with id
-router.patch('/:idCourse',auth.isAdmin, update);
+router.patch('/:idCourse',auth.required, update);
 // Delete a Course with id
-router.delete('/:idCourse',auth.isAdmin, deleteOne);
+router.delete('/:idCourse',auth.required, deleteOne);
 
 module.exports = router;

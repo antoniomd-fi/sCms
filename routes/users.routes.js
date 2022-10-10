@@ -4,8 +4,8 @@ const auth = require('../config/auth.js');
 
 router.post('/signUp',auth.optional, signUp);
 router.post('/logIn',auth.optional, logIn);
-router.get('/',auth.isAdmin, findAll);
-router.get('/:idUser',auth.isAdmin, findOne);
-router.delete('/:idUser',auth.isAdmin, deleteOne)
+router.get('/',auth.required, findAll);
+router.get('/:idUser',auth.required, findOne);
+router.delete('/:idUser',auth.required, deleteOne)
 
 module.exports = router;
