@@ -13,7 +13,7 @@ app.use(auth.optional);
 
 // Routes
 app.use('/', routes);
-app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 //await sequelize.sync({ force: true });
 

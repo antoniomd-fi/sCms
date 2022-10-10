@@ -1,5 +1,7 @@
 This project is part of phase 2 of the Santander and BEDU scholarship.
 
+* [Documentation swagger](https://scool-managment-system.onrender.com/api-doc)
+* [Server](https://scool-managment-system.onrender.com)
 
 ## Table of Contents
 1. [Technologies](#technologies)

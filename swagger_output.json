@@ -19,15 +19,10 @@
     }
   },
   "security": [ { "Bearer": [] } ],
-  "servers": [
-    {
-      "url": "http://localhost:3000",
-      "description": "Development server"
-    },
-    {
-      "url": "https://scool-managment-system.onrender.com/",
-      "description": "Production server"
-    }
+  "host": "scool-managment-system.onrender.com",
+  "basePath": "/",
+  "schemes": [
+    "https"
   ],
   "tags": [
     {
