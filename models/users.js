@@ -12,7 +12,7 @@ const User = sequelize.define('User', {
         primaryKey: true
     },
     username: {
-        type: DataTypes.CHAR(64),
+        type: DataTypes.STRING,
         allowNull: false,
         unique: true,
         validate: {
@@ -20,15 +20,15 @@ const User = sequelize.define('User', {
         }
     },
     name: {
-        type: DataTypes.CHAR(64),
+        type: DataTypes.STRING,
         allowNull: false
     },
     surname: {
-        type: DataTypes.CHAR(128),
+        type: DataTypes.STRING,
         allowNull: false
     },
     email: {
-        type: DataTypes.CHAR(64),
+        type: DataTypes.STRING,
         allowNull: false,
         unique: true,
         validate: {
@@ -36,22 +36,22 @@ const User = sequelize.define('User', {
         }
     },
     phone: {
-        type: DataTypes.CHAR(10),
+        type: DataTypes.STRING,
         allowNull: false,
         validate: {
             is: /^\+[0-9][0-9]\d{10}$/
         }
     },
     isAdmin: {
-        type: Boolean,
+        type: DataTypes.BOOLEAN,
         allowNull: false,
     },
     password_hash: {
-        type: DataTypes.CHAR(64),
+        type: DataTypes.STRING,
         allowNull: true,
     },
     password_salt: {
-        type: DataTypes.CHAR(64),
+        type: DataTypes.STRING,
         allowNull: true,
     },
 
