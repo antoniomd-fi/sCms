@@ -13,16 +13,16 @@ const {
 // Create a new Note
 router.post('/',auth.required, create);
 // Retrieve a all Notes
-router.get('/',auth.optional, findAll);
+router.get('/',auth.required, findAll);
 // Retrieve a single Note with id
 router.get('/:idNote',auth.optional, findOne);
 // Delete a Note with id
-router.delete('/:idNote', auth.isAdmin, deleteOne);
+router.delete('/:idNote', auth.required, deleteOne);
 // Retrieve all Notes
 router.get('/student/:idStudent',auth.optional, getStudentNotes);
 
 router.get('/student/courses/:idStudent',auth.optional, getStudentCourses);
 //Update the student's score
-router.put ('/student/:idStudent',auth.isAdmin, updateScore)
+router.put ('/student/:idStudent',auth.required, updateScore)
 
 module.exports = router;

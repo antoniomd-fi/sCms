@@ -3,7 +3,7 @@
   "info": {
     "version": "1.0.0",
     "title": "School Management System API",
-    "description":"This is a simple CRUD API application made with Express and documented with Swagger",
+    "description":"This is a simple CRUD API application made with Express and documented with Swagger. This is a tiny DB where we try to simulate a schoool management system to school. The topic selected is for the variety and usability to replicate for any person.",
     "contact": {
         "name": "Swagger",
         "url": "https://swagger.io",
@@ -19,8 +19,16 @@
     }
   },
   "security": [ { "Bearer": [] } ],
-  "host": "https://scool-managment-system.onrender.com",
-  "basePath": "/",
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Development server"
+    },
+    {
+      "url": "https://scool-managment-system.onrender.com/",
+      "description": "Production server"
+    }
+  ],
   "tags": [
     {
       "name": "user",

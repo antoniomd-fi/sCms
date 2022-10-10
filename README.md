@@ -40,8 +40,34 @@ Install node modules and run the application.
     npm run dev
 ```
 
+Open the browser in localhost:3000
+
 <a name="usage"></a>
 ## 3. Result and Use
+
+<img width="1440" alt="Captura de Pantalla 2022-10-09 a la(s) 20 46 10" src="https://user-images.githubusercontent.com/73664479/194789692-c4bca73b-11dc-46c3-94dc-e4458c6955ff.png">
+
+### Use
+
+1. First create user.
+
+
+<img width="1440" alt="Captura de Pantalla 2022-10-09 a la(s) 20 58 13" src="https://user-images.githubusercontent.com/73664479/194790214-9df623e0-3a73-43d7-b450-3d374ab89dd7.png">
+
+
+2. LogIn in server
+
+
+<img width="1440" alt="Captura de Pantalla 2022-10-09 a la(s) 21 00 47" src="https://user-images.githubusercontent.com/73664479/194790340-c6b7375f-b8b6-4710-aa0f-7f82af33827a.png">
+
+
+3. Use token for authentication returned on login
+
+
+<img width="1440" alt="Captura de Pantalla 2022-10-09 a la(s) 21 02 42" src="https://user-images.githubusercontent.com/73664479/194790435-8e503d32-48df-48bc-811f-3deed7822bcd.png">
+
+
+4. Ready to start managing your students
 
 **Home page**
 
