@@ -15,11 +15,11 @@ app.use(auth.optional);
 app.use('/', routes);
 app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
-
+//await sequelize.sync({ force: true });
 
 try {
     sequelize.authenticate();
-    sequelize.sync({ force: true } );
+    sequelize.sync();
     console.log('Connected to DB');
 } catch (error) {
     console.log('Unable to connect to DB:', error);

@@ -17,16 +17,17 @@ async function signUp(req, res) {
             "phone": user.phone,
             "isAdmin": user.isAdmin
         });
-    } catch (err) {
-        if (["SequelizeValidationError", "SequelizeUniqueConstraintError"].includes(err.name) ) {
-            return res.status(400).json({
-                error: err.errors.map(e => e.message)
-                //error: err,
-            })
-        }
-        else {
-            throw err;
-        }
+    } catch (error) {
+        // if (["SequelizeValidationError", "SequelizeUniqueConstraintError"].includes(err.name) ) {
+        //     return res.status(400).json({
+        //         error: err.errors.map(e => e.message)
+        //         //error: err,
+        //     })
+        // }
+        // else {
+        //     throw err;
+        // }
+        return res.status(400).json({mensaje: "Some error occurred"});
     }
 }
 /*Sign In*/
