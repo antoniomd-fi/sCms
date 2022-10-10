@@ -32,32 +32,19 @@ async function signUp(req, res) {
 /*Sign In*/
 async function logIn(req, res) {
     const body = req.body;
-    try{
-        const user = await User.findOne({where: {username: body['username']}});
-        if (!user) {
-            return res.status(404).json({error: "User not found"});
-        }
-        if (User.validatePassword(body['password'], user.password_salt, user.password_hash)) {
-            return res.status(200).json({
-               // mensaje: "Bienvenido!"
-               user: user.username,
-               email: user.email,
-               token: User.generateJWT(user)
-            });
-        } else {
-            return res.status(400).json({mensaje: "Wrong Password"});
-        }
+    const user = await User.findOne({where: {username: body['username']}});
+    if (!user) {
+        return res.status(404).json({error: "User not found"});
     }
-    catch(err) {
-        if (["SequelizeValidationError", "SequelizeUniqueConstraintError"].includes(err.name) ) {
-            return res.status(400).json({
-                error: err.errors.map(e => e.message)
-                //error: err,
-            })
-        }
-        else {
-            throw err;
-        }
+    if (User.validatePassword(body['password'], user.password_salt, user.password_hash)) {
+        return res.status(200).json({
+           // mensaje: "Bienvenido!"
+           user: user.username,
+           email: user.email,
+           token: User.generateJWT(user)
+        });
+    } else {
+        return res.status(400).json({mensaje: "Wrong Password"});
     }
 }
 
