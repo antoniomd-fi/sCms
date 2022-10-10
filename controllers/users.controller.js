@@ -4,7 +4,7 @@ const User = require('../models/users.js');
 async function signUp(req, res) {
     const body = req.body;
     try { 
-        const user =  await User.create(body);
+        const user = await User.create(body);
         const {salt, hash} = User.createPassword(body['password']);
         user.password_salt = salt;
         user.password_hash = hash;
@@ -17,17 +17,16 @@ async function signUp(req, res) {
             "phone": user.phone,
             "isAdmin": user.isAdmin
         });
-    } catch (error) {
-        // if (["SequelizeValidationError", "SequelizeUniqueConstraintError"].includes(err.name) ) {
-        //     return res.status(400).json({
-        //         error: err.errors.map(e => e.message)
-        //         //error: err,
-        //     })
-        // }
-        // else {
-        //     throw err;
-        // }
-        return res.status(400).json({mensaje: "Some error occurred"});
+    } catch (err) {
+        if (["SequelizeValidationError", "SequelizeUniqueConstraintError"].includes(err.name) ) {
+            return res.status(400).json({
+                error: err.errors.map(e => e.message)
+                //error: err,
+            })
+        }
+        else {
+            throw err;
+        }
     }
 }
 /*Sign In*/
