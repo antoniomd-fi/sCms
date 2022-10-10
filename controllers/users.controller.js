@@ -17,8 +17,8 @@ async function signUp(req, res) {
             "phone": user.phone,
             "isAdmin": user.isAdmin
         });
-    } catch (err) {
-        if (["SequelizeValidationError", "SequelizeUniqueConstraintError"].includes(err.name) ) {
+    } catch (error) {
+        /*if (["SequelizeValidationError", "SequelizeUniqueConstraintError"].includes(err.name) ) {
             return res.status(400).json({
                 error: err.errors.map(e => e.message)
                 //error: err,
@@ -28,7 +28,10 @@ async function signUp(req, res) {
             return res.status(500).json({
                 message: error.message || "Some error occurred"
             });
-        }
+        }*/
+        res.status(500).json({
+            message: error.message || "Some error occurred while creating the User."
+        });
     }
 }
 /*Sign In*/
@@ -50,8 +53,8 @@ async function logIn(req, res) {
             return res.status(400).json({mensaje: "Wrong Password"});
         }
     }
-    catch(err) {
-        if (["SequelizeValidationError", "SequelizeUniqueConstraintError"].includes(err.name) ) {
+    catch(error) {
+        /*if (["SequelizeValidationError", "SequelizeUniqueConstraintError"].includes(err.name) ) {
             return res.status(400).json({
                 error: err.errors.map(e => e.message)
                 //error: err,
@@ -59,7 +62,10 @@ async function logIn(req, res) {
         }
         else {
             throw err;
-        }
+        }*/
+        res.status(500).json({
+            message: error.message || "Some error occurred while login."
+        });
     }
 }
 
