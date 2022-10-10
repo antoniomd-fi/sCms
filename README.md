@@ -46,7 +46,7 @@ Install node modules and run the application.
 **Home page**
 
 
-On this page we have an input where we can search for a recipe by its full name or put a letter and it returns matches.
+This is a tiny DB where we try to simulate a schoool management system to school. The topic selected is for the variety and usability to replicate for any person.
 
 
 
@@ -57,9 +57,9 @@ On this page we have an input where we can search for a recipe by its full name 
 
 - Antonio Martin [antoniomd-fi](https://github.com/antoniomd-fi)
 
-- Gerardo Herrera [gerhercar21](https://github.com/gerhercar21)
+- Gerardo Hernandez [gerhercar21](https://github.com/gerhercar21)
 
-- Eduardo Castillo [EduCastilloHerrera](https://github.com/EduCastilloHerrera)
+- Edwin Castillo [EduCastilloHerrera](https://github.com/EduCastilloHerrera)
 
 - Alejandro Gerónimo [ElMandu](https://github.com/ElMandu)
 
