@@ -8,7 +8,7 @@ async function signUp(req, res) {
         const {salt, hash} = User.createPassword(body['password']);
         user.password_salt = salt;
         user.password_hash = hash;
-        await user.save();
+        user.save().catch(err => {throw error});
         res.status(201).json({
             "username": user.username,
             "name": user.name,
@@ -32,19 +32,27 @@ async function signUp(req, res) {
 /*Sign In*/
 async function logIn(req, res) {
     const body = req.body;
-    const user = await User.findOne({where: {username: body['username']}});
-    if (!user) {
-        return res.status(404).json({error: "User not found"});
+    console.log("AHHH", body)
+    try{
+        const user = await User.findOne({where: {username: body['username']}});
+        if (!user) {
+            return res.status(404).json({error: "User not found"});
+        }
+        if (User.validatePassword(body['password'], user.password_salt, user.password_hash)) {
+            return res.status(200).json({
+               // mensaje: "Bienvenido!"
+               user: user.username,
+               email: user.email,
+               token: User.generateJWT(user)
+            });
+        } else {
+            return res.status(400).json({mensaje: "Wrong Password"});
+        }
     }
-    if (User.validatePassword(body['password'], user.password_salt, user.password_hash)) {
-        return res.status(200).json({
-           // mensaje: "Bienvenido!"
-           user: user.username,
-           email: user.email,
-           token: User.generateJWT(user)
+    catch(error){
+        res.status(500).json({
+            message: error.message || "Some error occurred while retrieving users."
         });
-    } else {
-        return res.status(400).json({mensaje: "Wrong Password"});
     }
 }
 

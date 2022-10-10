@@ -13,7 +13,7 @@ const {
 // Create a new Note
 router.post('/',auth.required, create);
 // Retrieve a all Notes
-router.get('/',auth.required, findAll);
+router.get('/', findAll);
 // Retrieve a single Note with id
 router.get('/:idNote',auth.optional, findOne);
 // Delete a Note with id
