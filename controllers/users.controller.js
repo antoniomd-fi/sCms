@@ -25,7 +25,9 @@ async function signUp(req, res) {
             })
         }
         else {
-            throw err;
+            return res.status(500).json({
+                message: error.message || "Some error occurred"
+            });
         }
     }
 }
